@@ -16,13 +16,13 @@ class PrivateBetaMiddleware(object):
         deny then allow behavior.
     
     ``PRIVATEBETA_ALWAYS_ALLOW_VIEWS``
-        A list of full view names that should always pass through.  All
-        views in ``django.contrib.auth.views`` and ``privatebeta.urls``
-        will pass through unless they are explicitly prohibited in 
-        ``PRIVATEBETA_NEVER_ALLOW_VIEWS``
-    
+        A list of full view names that should always pass through.
+
     ``PRIVATEBETA_ALWAYS_ALLOW_MODULES``
-        A list of modules that should always pass through.
+        A list of modules that should always pass through.  All
+        views in ``django.contrib.auth.views``, ``django.views.static``
+        and ``privatebeta.views`` will pass through unless they are
+        explicitly prohibited in ``PRIVATEBETA_NEVER_ALLOW_VIEWS``
     
     ``PRIVATEBETA_REDIRECT_URL``
         The URL to redirect to.  Can be relative or absolute.
@@ -38,7 +38,7 @@ class PrivateBetaMiddleware(object):
         if request.user.is_authenticated():
             # User is logged in, no need to check anything else.
             return
-        whitelisted_modules = ['django.contrib.auth.views', 'privatebeta.views']
+        whitelisted_modules = ['django.contrib.auth.views', 'django.views.static', 'privatebeta.views']
         if self.always_allow_modules:
             whitelisted_modules += self.always_allow_modules
 
