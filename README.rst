@@ -97,3 +97,24 @@ There are a few settings that influence behavior of the middleware:
 
 ``PRIVATEBETA_REDIRECT_URL``
     The URL to redirect to.  Can be relative or absolute.
+
+Similar projects
+================
+
+* Pinax includes a `private beta project`_ that shows how to dynamically enable
+  or disable account creation in your `urlconf`_ in concert with a setting.  It
+  also includes a `signup code`_ app that allows you to create beta codes with
+  a limited number of uses.
+* `django-invitation`_ is a reusable application designed to allow existing beta
+  users to invite new users to the site for a viral beta.  It builds on top of
+  `django-registration`_ and can require an invite before a user is allowed to
+  create an account.
+* `django-invite`_ is a lighter weight reusable application designed to restrict
+  logins via an invite system.
+
+.. _private beta project: http://github.com/pinax/pinax/tree/master/pinax/projects/private_beta_project/
+.. _urlconf: http://github.com/pinax/pinax/blob/master/pinax/projects/private_beta_project/urls.py
+.. _signup code: http://github.com/pinax/pinax/tree/master/pinax/apps/signup_codes/
+.. _django-invitation: http://bitbucket.org/david/django-invitation/overview/
+.. _django-registration: http://bitbucket.org/ubernostrum/django-registration/
+.. _django-invite: http://bitbucket.org/lorien/django-invite/
