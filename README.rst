@@ -11,11 +11,8 @@ private (closed) beta:
   control account creation this is a very effective way of limiting a site
   to beta testers only.
 
-Installation
-============
-
 Email invite form
------------------
+=================
 
 To use the invite form, you first need to add ``privatebeta`` to
 ``INSTALLED_APPS`` in your settings file::
@@ -69,11 +66,18 @@ The included views take two optional keyword arguments for flexibility.:
     Optional.
 
 Closed beta middleware
-----------------------
+======================
 
 If you would also like to prevent non-logged-in users from viewing your site,
 you can make use of ``privatebeta.middleware.PrivateBetaMiddleware``.  This
 middleware redirects all views to a specified location if a user is not logged in.
+
+To use the middleware, add it to ``MIDDLEWARE_CLASSSES`` in your settings file::
+
+    MIDDLEWARE_CLASSES = (
+        ...
+        'privatebeta.middleware.PrivateBetaMiddleware',
+    )
 
 There are a few settings that influence behavior of the middleware:
 
