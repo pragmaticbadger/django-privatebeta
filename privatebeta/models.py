@@ -8,4 +8,3 @@ class InviteRequest(models.Model):
 
     def __unicode__(self):
         return _('Invite for %(email)s') % {'email': self.email}
-        return u"Invite for %s" % self.email
