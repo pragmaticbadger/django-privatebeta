@@ -112,9 +112,32 @@ Similar projects
 * `django-invite`_ is a lighter weight reusable application designed to restrict
   logins via an invite system.
 
+Upgrading from 0.3
+==================
+
+This application uses `South`_ (0.6.2 or greater) to manage schema migrations.
+If you don't already have South installed, you will need to do so:
+
+* Add south to your INSTALLED_APPS.
+* Run manage.py syncdb to install South.
+
+Once South is installed, you will have to "fake" the schema for the 0.3
+release, then migrate to 0.4.0:
+
+* Run manage.py migrate --fake privatebeta 0001.
+* Run manage.py migrate --list.
+* Verify that 0001_initial has been applied to privatebeta and 002_add_invited_field has not.
+* Run manage.py migrate privatebeta
+
+Compatibility
+=============
+
+This application is known to work with Django 1.0.X and Django 1.1.X.
+
 .. _private beta project: http://github.com/pinax/pinax/tree/master/pinax/projects/private_beta_project/
 .. _urlconf: http://github.com/pinax/pinax/blob/master/pinax/projects/private_beta_project/urls.py
 .. _signup code: http://github.com/pinax/pinax/tree/master/pinax/apps/signup_codes/
 .. _django-invitation: http://bitbucket.org/david/django-invitation/overview/
 .. _django-registration: http://bitbucket.org/ubernostrum/django-registration/
 .. _django-invite: http://bitbucket.org/lorien/django-invite/
+.. _South: http://south.aeracode.org/
