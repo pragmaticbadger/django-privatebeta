@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from privatebeta.forms import InviteRequestForm
 
-def invite(request, template_name="privatebeta/invite.html", extra_context=None):
+def invite(request, form_class=InviteRequestForm, template_name="privatebeta/invite.html", extra_context=None):
     """
     Allow a user to request an invite at a later date by entering their email address.
     
@@ -31,13 +31,10 @@ def invite(request, template_name="privatebeta/invite.html", extra_context=None)
     :template:`privatebeta/invite.html` or the template name specified by
     ``template_name``.
     """
-    if request.POST:
-        form = InviteRequestForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('privatebeta_sent'))
-    else:
-        form = InviteRequestForm()
+    form = form_class(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect(reverse('privatebeta_sent'))
 
     context = {'form': form}
 
