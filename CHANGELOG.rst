@@ -2,6 +2,13 @@
 Changelog
 =========
 
+Version 0.4.2
+=============
+
+* `Sébastien Fievet <http://github.com/zyegfryed>`_ added the ability to use
+  a custom form for the invite view.
+
+
 Version 0.4.1
 =============
 
