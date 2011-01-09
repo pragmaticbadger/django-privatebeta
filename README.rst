@@ -38,6 +38,7 @@ You will also need to create two templates.  The first is
     <h3>Enter your email address and we'll send you an invite soon</h3>
     <form action="{% url privatebeta_invite %}" method="post">
     {{ form }}
+    {% csrf_token %}
     <input type="submit" value="Submit" />
     </form>
     {% endblock %}
