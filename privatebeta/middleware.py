@@ -10,6 +10,12 @@ class PrivateBetaMiddleware(object):
     
     **Settings:**
     
+    ``PRIVATEBETA_ENABLE_BETA``
+        Whether or not the beta middleware should be used. If set to `False` 
+        the PrivateBetaMiddleware middleware will be ignored and the request 
+        will be returned. This is useful if you want to disable privatebeta 
+        on a development machine. Default is `True`.
+    
     ``PRIVATEBETA_NEVER_ALLOW_VIEWS``
         A list of full view names that should *never* be displayed.  This
         list is checked before the others so that this middleware exhibits
@@ -29,13 +35,14 @@ class PrivateBetaMiddleware(object):
     """
 
     def __init__(self):
+        self.enable_beta = getattr(settings, 'PRIVATEBETA_ENABLE_BETA', True)
         self.never_allow_views = getattr(settings, 'PRIVATEBETA_NEVER_ALLOW_VIEWS', [])
         self.always_allow_views = getattr(settings, 'PRIVATEBETA_ALWAYS_ALLOW_VIEWS', [])
         self.always_allow_modules = getattr(settings, 'PRIVATEBETA_ALWAYS_ALLOW_MODULES', [])
         self.redirect_url = getattr(settings, 'PRIVATEBETA_REDIRECT_URL', '/invite/')
 
     def process_view(self, request, view_func, view_args, view_kwargs):
-        if request.user.is_authenticated():
+        if request.user.is_authenticated() or not self.enable_beta:
             # User is logged in, no need to check anything else.
             return
         whitelisted_modules = ['django.contrib.auth.views', 'django.views.static', 'privatebeta.views']
